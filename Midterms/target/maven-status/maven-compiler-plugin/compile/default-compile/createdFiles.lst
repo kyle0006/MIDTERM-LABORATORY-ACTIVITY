@@ -1,0 +1,9 @@
+Library\business\Magazine.class
+Library\hosts\Main.class
+Library\business\Member.class
+Library\business\LibraryItem.class
+Library\business\Borrowable.class
+Library\business\Library.class
+Library\business\Book.class
+Library\business\Loan.class
+Library\data\SampleData.class

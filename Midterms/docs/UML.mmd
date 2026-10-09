@@ -1,0 +1,71 @@
+classDiagram
+    class Borrowable {
+      <<interface>>
+      +isAvailable() boolean
+      +borrowItem() void
+      +returnItem() void
+    }
+    class LibraryItem {
+      <<abstract>>
+      -String id
+      -String title
+      -boolean available
+      +getId() String
+      +getTitle() String
+      +setTitle(String) void
+      +getItemType()* String
+      +getLoanDays()* int
+      +getDescription() String
+    }
+    class Book {
+      -String author
+      +getAuthor() String
+      +setAuthor(String) void
+      +getItemType() String
+      +getLoanDays() int
+      +getDescription() String
+    }
+    class Magazine {
+      -int issueNumber
+      +getIssueNumber() int
+      +setIssueNumber(int) void
+      +getItemType() String
+      +getLoanDays() int
+      +getDescription() String
+    }
+    class Member {
+      -String memberId
+      -String name
+      +getMemberId() String
+      +getName() String
+      +setName(String) void
+    }
+    class Loan {
+      -LibraryItem item
+      -Member member
+      -LocalDate borrowDate
+      -LocalDate dueDate
+      -LocalDate returnDate
+      +isActive() boolean
+      +close(LocalDate) void
+    }
+    class Library {
+      -ArrayList~LibraryItem~ items
+      -ArrayList~Member~ members
+      -ArrayList~Loan~ loans
+      +addItem(LibraryItem) void
+      +registerMember(Member) void
+      +findItem(String) LibraryItem
+      +findMember(String) Member
+      +borrow(String,String) Loan
+      +returnItem(String) Loan
+      +getActiveLoans() List~Loan~
+    }
+    Borrowable <|.. LibraryItem
+    LibraryItem <|-- Book
+    LibraryItem <|-- Magazine
+    Library "1" o-- "0..*" LibraryItem
+    Library "1" o-- "0..*" Member
+    Library "1" o-- "0..*" Loan
+    Loan "0..*" --> "1" Member
+    Loan "0..*" --> "1" LibraryItem
